@@ -7,9 +7,10 @@ class Stats extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var model = Provider.of<Workout>(context);
+    var model = Provider.of<WorkoutController>(context);
 
     return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       mainAxisSize: MainAxisSize.min,
       children: [
         Text("MAX: ${model.getMax()}"),

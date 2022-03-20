@@ -7,7 +7,7 @@ class SetWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var model = Provider.of<Workout>(context);
+    var model = Provider.of<WorkoutController>(context);
 
     return SizedBox(
       height: 300,
@@ -15,8 +15,13 @@ class SetWidget extends StatelessWidget {
       child: ListView.builder(
           itemCount: model.getSize(),
           itemBuilder: (context, i) {
-            return Card(
-              child: Text("${i + 1}: ${model.set[i].toString()}"),
+            return ListTile(
+              leading: Text("${i + 1}:", style: TextStyle(fontSize: 24)),
+              title: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(model.getSet()[i].toString(),
+                    style: TextStyle(fontSize: 24)),
+              ),
             );
           }),
     );

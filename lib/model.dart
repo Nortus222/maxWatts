@@ -1,78 +1,75 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_countdown_timer/countdown_timer_controller.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:max_watts/hiveModel.dart';
 
-class Timer extends ChangeNotifier {}
+class TimerController extends ChangeNotifier {
+  late CountdownTimerController _controller;
 
-class Workout extends ChangeNotifier {
-  late DateTime date;
-  late List<int> set;
-
-  void append(int record) {
-    set.add(record);
-
+  void start() {
+    _controller.start();
     notifyListeners();
   }
 
-  //TODO: check max min avg on append
+  CountdownTimerController getController() {
+    int endTime = DateTime.now().millisecondsSinceEpoch + 1000 * 60;
+    _controller = CountdownTimerController(endTime: endTime);
+    return _controller;
+  }
+}
 
-  Workout() {
-    date = DateTime.now();
-    set = [];
+class WorkoutController extends ChangeNotifier {
+  Workout? workout;
+  Box<Workout>? hiveBox;
+
+  WorkoutController() {
+    hiveBox = Hive.box('workouts');
+
+    workout = hiveBox!.values.isEmpty ? Workout() : hiveBox!.values.last;
+  }
+
+  void append(int record) {
+    workout!.append(record);
+    workout!.sum += record;
+
+    if (workout!.getSet().length == 1) {
+      workout!.max = record;
+      workout!.min = record;
+    } else if (record > workout!.max) {
+      workout!.max = record;
+    } else if (record < workout!.min) {
+      workout!.min = record;
+    }
+
+    workout!.avg = workout!.sum / workout!.getSet().length.toDouble();
+    workout!.plank = workout!.avg * 0.9;
+
+    notifyListeners();
+    hiveBox!.putAt(0, workout!);
+  }
+
+  List<int> getSet() {
+    return workout!.getSet();
   }
 
   int getSize() {
-    return set.length;
+    return workout!.getSet().length;
   }
 
   int getMax() {
-    if (set.isEmpty) {
-      return 0;
-    }
-
-    int max = set[0];
-
-    for (int i = 1; i < set.length; i++) {
-      if (set[i] > max) {
-        max = set[i];
-      }
-    }
-
-    return max;
+    return workout!.max;
   }
 
   int getMin() {
-    if (set.isEmpty) {
-      return 0;
-    }
-
-    int min = set[0];
-
-    for (int i = 1; i < set.length; i++) {
-      if (set[i] < min) {
-        min = set[i];
-      }
-    }
-
-    return min;
+    return workout!.min;
   }
 
   double getAvg() {
-    if (set.isEmpty) {
-      return 0;
-    }
-
-    int sum = 0;
-    for (int i = 0; i < set.length; i++) {
-      sum += set[i];
-    }
-
-    return sum / set.length.toDouble();
+    return workout!.avg;
   }
 
   double get90() {
-    if (set.isEmpty) {
-      return 0;
-    }
-
-    return getAvg() * 0.9;
+    return workout!.plank;
   }
 }

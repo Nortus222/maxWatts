@@ -14,7 +14,8 @@ class _EntryState extends State<Entry> {
 
   @override
   Widget build(BuildContext context) {
-    var model = Provider.of<Workout>(context);
+    var model = Provider.of<WorkoutController>(context);
+    var timer = Provider.of<TimerController>(context);
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -32,6 +33,7 @@ class _EntryState extends State<Entry> {
         TextButton(
             onPressed: () {
               model.append(int.parse(controller.text.trim()));
+              timer.start();
               setState(() {
                 controller.clear();
               });

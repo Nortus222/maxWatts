@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:max_watts/model.dart';
+import 'package:max_watts/widgets/appBar.dart';
 import 'package:max_watts/widgets/entryWidget.dart';
 import 'package:max_watts/widgets/setWidget.dart';
 import 'package:max_watts/widgets/statsWidget.dart';
@@ -10,24 +10,35 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
+    var size = MediaQuery.of(context).size;
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      appBar: CustomAppBar(),
       body: Padding(
         padding: const EdgeInsets.all(10),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Row(
-              children: const [
-                SetWidget(),
-                Stats(),
-              ],
+            SizedBox(
+              height: size.height / 3,
+              child: Row(
+                children: const [
+                  Flexible(
+                    flex: 2,
+                    child: SetWidget(),
+                  ),
+                  Flexible(flex: 1, child: Stats()),
+                ],
+              ),
             ),
-            Entry(),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Entry(),
+            ),
             Timer(),
           ],
         ),
       ),
-    ));
+    );
   }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
-import 'package:flutter_countdown_timer/countdown_timer_controller.dart';
+import 'package:custom_timer/custom_timer.dart';
 import 'package:provider/provider.dart';
 import 'package:max_watts/model.dart';
 
@@ -9,11 +8,32 @@ class Timer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CountdownTimerController controller =
+    CustomTimerController controller =
         Provider.of<TimerController>(context).getController();
 
-    return CountdownTimer(
+    //TODO add controlls
+    return CustomTimer(
       controller: controller,
+      begin: Duration(minutes: 1),
+      end: Duration(),
+      builder: (time) {
+        return Text(
+          "${time.minutes}:${time.seconds}",
+          style: TextStyle(fontSize: 24),
+        );
+      },
+      stateBuilder: (time, state) {
+        if (state == CustomTimerState.finished) {
+          return Text("GO");
+        }
+        return null;
+      },
+      animationBuilder: (child) {
+        return AnimatedSwitcher(
+          duration: Duration(milliseconds: 250),
+          child: child,
+        );
+      },
     );
   }
 }

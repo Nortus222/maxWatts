@@ -32,6 +32,47 @@ class Workout extends HiveObject {
 
   void append(int record) {
     _set!.add(record);
+    sum += record;
+
+    if (_set!.length == 1) {
+      max = record;
+      min = record;
+    } else if (record > max) {
+      max = record;
+    } else if (record < min) {
+      min = record;
+    }
+
+    avg = sum / _set!.length.toDouble();
+    plank = avg * 0.9;
+  }
+
+  void remove(int index) {
+    int num = _set![index];
+    _set!.removeAt(index);
+
+    sum -= num;
+
+    if (num == max) {
+      int tmpMax = _set![0];
+      for (int i = 1; i < _set!.length; i++) {
+        if (_set![i] > tmpMax) {
+          tmpMax = _set![i];
+        }
+      }
+      max = tmpMax;
+    } else if (num == min) {
+      int tmpMin = _set![0];
+      for (int i = 1; i < _set!.length; i++) {
+        if (_set![i] < tmpMin) {
+          tmpMin = _set![i];
+        }
+      }
+      min = tmpMin;
+    }
+
+    avg = sum / _set!.length.toDouble();
+    plank = avg * 0.9;
   }
 
   List<int> getSet() {

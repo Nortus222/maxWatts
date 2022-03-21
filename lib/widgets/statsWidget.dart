@@ -10,13 +10,20 @@ class Stats extends StatelessWidget {
     var model = Provider.of<WorkoutController>(context);
 
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        Text("MAX: ${model.getMax()}"),
-        Text("MIN: ${model.getMin()}"),
-        Text("AVG: ${model.getAvg().toStringAsFixed(3)}"),
-        Text("90% bar: ${model.get90().toStringAsFixed(3)}"),
+        Text(
+          "MAX: ${model.getMax()}",
+        ),
+        Text(
+          "MIN: ${model.getMin()}",
+        ),
+        Text(
+          "AVG: ${model.getAvg().toStringAsFixed(2)}",
+        ),
+        Text(
+          "90% bar: ${model.get90().toStringAsFixed(2)}",
+        ),
       ],
     );
   }

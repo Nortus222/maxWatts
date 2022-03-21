@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:max_watts/hiveModel.dart';
 import 'package:max_watts/model.dart';
 import 'package:max_watts/pages/HomePage.dart';
+import 'package:max_watts/theme.dart';
 import 'package:provider/provider.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -23,14 +23,12 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider.value(value: WorkoutController()),
         ChangeNotifierProvider.value(value: TimerController()),
+        ChangeNotifierProvider.value(value: ListScrollController()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
-        theme: ThemeData(
-          primaryColor: Colors.white,
-          primarySwatch: Colors.blue,
-        ),
+        theme: theme,
         home: Container(color: Colors.white, child: const HomePage()),
       ),
     );

@@ -1,21 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_countdown_timer/countdown_timer_controller.dart';
+import 'package:custom_timer/custom_timer.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:max_watts/hiveModel.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 
 class TimerController extends ChangeNotifier {
-  late CountdownTimerController _controller;
+  CustomTimerController? _controller;
+
+  TimerController() {
+    _controller = CustomTimerController();
+  }
 
   void start() {
-    _controller.start();
+    _controller!.start();
     notifyListeners();
   }
 
-  CountdownTimerController getController() {
-    int endTime = DateTime.now().millisecondsSinceEpoch + 1000 * 60;
-    _controller = CountdownTimerController(endTime: endTime);
-    return _controller;
+  CustomTimerController getController() {
+    return _controller!;
+  }
+}
+
+class ListScrollController extends ChangeNotifier {
+  AutoScrollController? _controller;
+
+  ListScrollController() {
+    _controller = AutoScrollController();
+  }
+
+  AutoScrollController getController() {
+    return _controller!;
   }
 }
 
@@ -31,19 +46,13 @@ class WorkoutController extends ChangeNotifier {
 
   void append(int record) {
     workout!.append(record);
-    workout!.sum += record;
 
-    if (workout!.getSet().length == 1) {
-      workout!.max = record;
-      workout!.min = record;
-    } else if (record > workout!.max) {
-      workout!.max = record;
-    } else if (record < workout!.min) {
-      workout!.min = record;
-    }
+    notifyListeners();
+    hiveBox!.putAt(0, workout!);
+  }
 
-    workout!.avg = workout!.sum / workout!.getSet().length.toDouble();
-    workout!.plank = workout!.avg * 0.9;
+  void remove(int index) {
+    workout!.remove(index);
 
     notifyListeners();
     hiveBox!.putAt(0, workout!);

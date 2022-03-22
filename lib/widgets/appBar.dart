@@ -1,23 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:max_watts/hiveModel.dart';
 import 'package:max_watts/model.dart';
+import 'package:max_watts/theme.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({Key? key}) : super(key: key);
+  Workout workout;
+  bool isHomePage;
+  CustomAppBar(this.workout, this.isHomePage, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var date = Provider.of<WorkoutController>(context).workout!.date;
+    var model = Provider.of<WorkoutsController>(context);
+    var timer = Provider.of<TimerController>(context);
     var format = DateFormat.yMMMMd('en_US');
 
     return AppBar(
-      title: Text(format.format(date!).toString()),
+      title: Text(format.format(workout.date!).toString()),
+      actions: isHomePage == true
+          ? [
+              IconButton(
+                icon: const Icon(Icons.add),
+                color: purple,
+                onPressed: () {
+                  model.add();
+                  timer.reset();
+                },
+              )
+            ]
+          : [],
+      leading: isHomePage == false
+          ? IconButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              icon: const Icon(Icons.arrow_back),
+              color: purple,
+            )
+          : null,
     );
   }
 
   @override
-  // TODO: implement preferredSize
-  Size get preferredSize => Size.fromHeight(50);
+  Size get preferredSize => const Size.fromHeight(50);
 }

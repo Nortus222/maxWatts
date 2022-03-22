@@ -14,10 +14,12 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    var lastWorkout = Provider.of<WorkoutsController>(context).lastWorkout!;
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        appBar: CustomAppBar(),
+        appBar: CustomAppBar(lastWorkout, true),
         body: Padding(
           padding: const EdgeInsets.all(10),
           child: Column(
@@ -26,12 +28,12 @@ class HomePage extends StatelessWidget {
               SizedBox(
                 height: size.height / 3,
                 child: Row(
-                  children: const [
+                  children: [
                     Flexible(
                       flex: 2,
-                      child: SetWidget(),
+                      child: SetWidget(lastWorkout),
                     ),
-                    Flexible(flex: 1, child: Stats()),
+                    Flexible(flex: 1, child: Stats(lastWorkout)),
                   ],
                 ),
               ),
@@ -39,10 +41,8 @@ class HomePage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: Entry(),
               ),
-              Timer(),
-              Expanded(
-                  child:
-                      Chart(Provider.of<WorkoutController>(context).workout!)),
+              const Timer(),
+              Expanded(child: Chart(lastWorkout)),
             ],
           ),
         ),

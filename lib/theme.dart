@@ -5,7 +5,8 @@ final theme = ThemeData(
     brightness: Brightness.light,
     primaryColor: grey,
     listTileTheme: ListTileThemeData(
-      tileColor: Colors.amber,
+      contentPadding: const EdgeInsets.all(5),
+      tileColor: grey,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
     ),
     cardTheme: CardTheme(

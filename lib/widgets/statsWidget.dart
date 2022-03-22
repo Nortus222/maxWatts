@@ -1,28 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:max_watts/model.dart';
-import 'package:provider/provider.dart';
+import 'package:max_watts/hiveModel.dart';
 
 class Stats extends StatelessWidget {
-  const Stats({Key? key}) : super(key: key);
+  Workout workout;
+  Stats(this.workout, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var model = Provider.of<WorkoutController>(context);
-
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         Text(
-          "MAX: ${model.getMax()}",
+          "MAX: ${workout.max}",
         ),
         Text(
-          "MIN: ${model.getMin()}",
+          "MIN: ${workout.min}",
         ),
         Text(
-          "AVG: ${model.getAvg().toStringAsFixed(2)}",
+          "AVG: ${workout.avg.toStringAsFixed(2)}",
         ),
         Text(
-          "90% bar: ${model.get90().toStringAsFixed(2)}",
+          "90% bar: ${workout.plank.toStringAsFixed(2)}",
         ),
       ],
     );

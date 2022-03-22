@@ -51,6 +51,11 @@ class Workout extends HiveObject {
     int num = _set![index];
     _set!.removeAt(index);
 
+    if (_set!.isEmpty) {
+      reset();
+      return;
+    }
+
     sum -= num;
 
     if (num == max) {
@@ -73,6 +78,18 @@ class Workout extends HiveObject {
 
     avg = sum / _set!.length.toDouble();
     plank = avg * 0.9;
+  }
+
+  void reset() {
+    max = 0;
+    min = 0;
+    sum = 0;
+    plank = 0.0;
+    avg = 0.0;
+  }
+
+  int length() {
+    return _set!.length;
   }
 
   List<int> getSet() {

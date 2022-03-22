@@ -16,7 +16,8 @@ class _EntryState extends State<Entry> {
 
   @override
   Widget build(BuildContext context) {
-    var model = Provider.of<WorkoutController>(context);
+    var lastWorkout = Provider.of<WorkoutsController>(context).lastWorkout!;
+    var workouts = Provider.of<WorkoutsController>(context);
     var timer = Provider.of<TimerController>(context);
     var listController =
         Provider.of<ListScrollController>(context).getController();
@@ -26,7 +27,7 @@ class _EntryState extends State<Entry> {
       children: [
         Row(
           children: [
-            Text("${model.getSize() + 1}) "),
+            Text("${lastWorkout.length() + 1}) "),
             Flexible(
                 flex: 2,
                 child: TextFormField(
@@ -51,10 +52,10 @@ class _EntryState extends State<Entry> {
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: TextButton(
               onPressed: () {
-                model.append(int.parse(controller.text.trim()));
+                workouts.lastAppend(int.parse(controller.text.trim()));
                 timer.start();
                 listController.scrollToIndex(
-                  model.getSize() - 1,
+                  lastWorkout.length() - 1,
                   duration: const Duration(milliseconds: 500),
                 );
                 setState(() {

@@ -5,6 +5,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:max_watts/hiveModel.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
+const WORKOUTS = 'workouts';
+
 class TimerController extends ChangeNotifier {
   CustomTimerController? _controller;
 
@@ -14,6 +16,11 @@ class TimerController extends ChangeNotifier {
 
   void start() {
     _controller!.start();
+    notifyListeners();
+  }
+
+  void reset() {
+    _controller!.reset();
     notifyListeners();
   }
 
@@ -34,51 +41,52 @@ class ListScrollController extends ChangeNotifier {
   }
 }
 
-class WorkoutController extends ChangeNotifier {
-  Workout? workout;
-  Box<Workout>? hiveBox;
+class WorkoutsController extends ChangeNotifier {
+  List<Workout>? workouts;
+  Workout? lastWorkout;
+  Box<Workout>? _hiveBox;
+  int? _lastIndex;
 
-  WorkoutController() {
-    hiveBox = Hive.box('workouts');
+  WorkoutsController() {
+    _hiveBox = Hive.box(WORKOUTS);
 
-    workout = hiveBox!.values.isEmpty ? Workout() : hiveBox!.values.last;
-  }
-
-  void append(int record) {
-    workout!.append(record);
-
-    notifyListeners();
-    hiveBox!.putAt(0, workout!);
+    workouts = _hiveBox!.values.toList();
+    lastWorkout = workouts!.isEmpty ? Workout() : workouts!.last;
+    _lastIndex = workouts!.length - 1;
   }
 
   void remove(int index) {
-    workout!.remove(index);
+    workouts!.removeAt(index);
+
+    lastWorkout = workouts!.last;
+    _lastIndex = workouts!.length - 1;
 
     notifyListeners();
-    hiveBox!.putAt(0, workout!);
+    _hiveBox!.deleteAt(index);
   }
 
-  List<int> getSet() {
-    return workout!.getSet();
+  void add() {
+    Workout newWorkout = Workout();
+    workouts!.add(newWorkout);
+
+    lastWorkout = workouts!.last;
+    _lastIndex = workouts!.length - 1;
+
+    notifyListeners();
+    _hiveBox!.add(newWorkout);
   }
 
-  int getSize() {
-    return workout!.getSet().length;
+  void lastAppend(int record) {
+    lastWorkout!.append(record);
+
+    notifyListeners();
+    _hiveBox!.putAt(_lastIndex!, lastWorkout!);
   }
 
-  int getMax() {
-    return workout!.max;
-  }
+  void lastRemove(int index) {
+    lastWorkout!.remove(index);
 
-  int getMin() {
-    return workout!.min;
-  }
-
-  double getAvg() {
-    return workout!.avg;
-  }
-
-  double get90() {
-    return workout!.plank;
+    notifyListeners();
+    _hiveBox!.putAt(_lastIndex!, lastWorkout!);
   }
 }

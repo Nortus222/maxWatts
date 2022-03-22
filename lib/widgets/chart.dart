@@ -38,11 +38,11 @@ class Chart extends StatelessWidget {
         minX: 0,
         minY: 0,
         maxX: workout.getSet().length + 3,
-        maxY: workout.max + 20,
+        maxY: workout.max + 100,
         extraLinesData: ExtraLinesData(horizontalLines: [
           HorizontalLine(
             y: workout.plank,
-            strokeWidth: 3,
+            strokeWidth: workout.plank == 0 ? 0 : 3,
             color: Colors.red,
           )
         ]),

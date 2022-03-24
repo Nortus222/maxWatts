@@ -36,7 +36,7 @@ class Chart extends StatelessWidget {
                 margin: 12)),
         borderData: FlBorderData(show: false),
         minX: 0,
-        minY: 0,
+        minY: workout.min - 100,
         maxX: workout.getSet().length + 3,
         maxY: workout.max + 100,
         extraLinesData: ExtraLinesData(horizontalLines: [

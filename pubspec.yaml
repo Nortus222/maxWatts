@@ -38,6 +38,7 @@ dependencies:
   scroll_to_index: ^2.1.1
   intl: ^0.17.0
   fl_chart: ^0.46.0
+  gsheets: ^0.3.2
 
 
   # The following adds the Cupertino Icons font to your application.

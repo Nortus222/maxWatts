@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:max_watts/pages/GsheetPage.dart';
 import 'package:max_watts/pages/HistoryPage.dart';
 import 'package:max_watts/pages/HomePage.dart';
 import 'package:max_watts/theme.dart';
@@ -25,7 +26,7 @@ class _MainPageState extends State<MainPage> {
       tabBar: CupertinoTabBar(
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home)),
-          BottomNavigationBarItem(icon: Icon(Icons.archive))
+          BottomNavigationBarItem(icon: Icon(Icons.archive)),
         ],
         backgroundColor: grey,
         activeColor: purple,

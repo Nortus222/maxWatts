@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:max_watts/hiveModel.dart';
 import 'package:max_watts/model.dart';
-import 'package:max_watts/pages/GsheetPage.dart';
+import 'package:max_watts/pages/UploadPage.dart';
 import 'package:max_watts/theme.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
@@ -28,6 +28,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   model.add();
                   timer.reset();
                 },
+              ),
+              IconButton(
+                icon: const Icon(Icons.upload),
+                color: purple,
+                onPressed: () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (BuildContext context) {
+                    return UploadPage(workout);
+                  }));
+                },
               )
             ]
           : [
@@ -37,20 +47,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 onPressed: () {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (BuildContext context) {
-                    return GsheetPage(workout);
+                    return UploadPage(workout);
                   }));
                 },
               )
             ],
-      leading: isHomePage == false
-          ? IconButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              icon: const Icon(Icons.arrow_back),
-              color: purple,
-            )
-          : null,
     );
   }
 

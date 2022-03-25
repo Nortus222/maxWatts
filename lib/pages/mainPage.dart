@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:max_watts/pages/GsheetPage.dart';
+import 'package:max_watts/pages/UploadPage.dart';
 import 'package:max_watts/pages/HistoryPage.dart';
 import 'package:max_watts/pages/HomePage.dart';
 import 'package:max_watts/theme.dart';

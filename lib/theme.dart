@@ -14,7 +14,7 @@ final theme = ThemeData(
         elevation: 0.5,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
     textTheme: TextTheme(
-        bodyMedium: TextStyle(color: Colors.black, fontSize: 24),
+        bodyMedium: const TextStyle(color: Colors.black, fontSize: 24),
         titleSmall: TextStyle(color: grey, fontSize: 22)),
     textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(
@@ -26,12 +26,13 @@ final theme = ThemeData(
             minimumSize: MaterialStateProperty.all(const Size(150, 50)),
             shape: MaterialStateProperty.all(RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20))))),
-    appBarTheme: const AppBarTheme(
+    appBarTheme: AppBarTheme(
+        iconTheme: IconThemeData(color: purple),
         systemOverlayStyle:
-            SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
+            const SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
         backgroundColor: Colors.transparent,
         elevation: 0,
-        titleTextStyle: TextStyle(color: Colors.black, fontSize: 22)));
+        titleTextStyle: const TextStyle(color: Colors.black, fontSize: 22)));
 
 Color purple = const Color(0xFF7947fb);
 Color grey = const Color(0xFFf1f2fd);

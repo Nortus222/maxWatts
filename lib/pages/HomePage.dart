@@ -17,33 +17,42 @@ class HomePage extends StatelessWidget {
     var lastWorkout = Provider.of<WorkoutsController>(context).lastWorkout!;
 
     return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: CustomAppBar(lastWorkout, true),
-        body: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SizedBox(
-                height: size.height / 3,
-                child: Row(
-                  children: [
-                    Flexible(
-                      flex: 2,
-                      child: SetWidget(lastWorkout),
-                    ),
-                    Flexible(flex: 1, child: Stats(lastWorkout)),
-                  ],
+      child: GestureDetector(
+        onTap: () {
+          FocusScopeNode currentFocus = FocusScope.of(context);
+          if (!currentFocus.hasPrimaryFocus) {
+            currentFocus.unfocus();
+          }
+        },
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          resizeToAvoidBottomInset: false,
+          appBar: CustomAppBar(lastWorkout, true),
+          body: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Flexible(
+                  flex: 2,
+                  child: Row(
+                    children: [
+                      Flexible(
+                        flex: 2,
+                        child: SetWidget(lastWorkout),
+                      ),
+                      Flexible(flex: 1, child: Stats(lastWorkout)),
+                    ],
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: Entry(),
-              ),
-              const Timer(),
-              Expanded(child: Chart(lastWorkout)),
-            ],
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Entry(),
+                ),
+                const Timer(),
+                Expanded(child: Chart(lastWorkout)),
+              ],
+            ),
           ),
         ),
       ),

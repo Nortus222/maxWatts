@@ -10,6 +10,7 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(WorkoutAdapter());
   await Hive.openBox<Workout>(WORKOUTS);
+  await Hive.openBox<String>(GSHEETSETTINGS);
   runApp(const MyApp());
 }
 
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider.value(value: TimerController()),
         ChangeNotifierProvider.value(value: ListScrollController()),
         ChangeNotifierProvider.value(value: WorkoutsController()),
+        ChangeNotifierProvider.value(value: GsheetController()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

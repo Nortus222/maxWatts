@@ -33,6 +33,7 @@ class _EntryState extends State<Entry> {
                 child: TextFormField(
                     cursorColor: purple,
                     controller: controller,
+                    keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       fillColor: grey,
                       filled: true,

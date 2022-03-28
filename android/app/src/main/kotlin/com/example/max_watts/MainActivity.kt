@@ -1,4 +1,4 @@
-package com.example.max_watts
+package com.max_watts
 
 import io.flutter.embedding.android.FlutterActivity
 

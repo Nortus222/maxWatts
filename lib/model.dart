@@ -120,7 +120,7 @@ class GsheetController extends ChangeNotifier {
   String? worksheetTitle;
   Box<String>? _hiveBox;
   bool hasCredentials = false;
-  var gsheets;
+  GSheets? gsheets;
   Spreadsheet? spreadsheet;
   Worksheet? sheet;
 
@@ -147,9 +147,10 @@ class GsheetController extends ChangeNotifier {
 
     gsheets = GSheets(jsonDecode(credentials!));
 
-    spreadsheet = await gsheets.spreadsheet(spreadsheetId);
+    spreadsheet = await gsheets!.spreadsheet(spreadsheetId!);
 
     sheet = spreadsheet!.worksheetByTitle(worksheetTitle!);
+    print(sheet);
 
     return !(sheet == null);
   }

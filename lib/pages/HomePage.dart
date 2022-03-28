@@ -13,7 +13,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
     var lastWorkout = Provider.of<WorkoutsController>(context).lastWorkout!;
 
     return SafeArea(

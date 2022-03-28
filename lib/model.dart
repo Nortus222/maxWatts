@@ -145,12 +145,11 @@ class GsheetController extends ChangeNotifier {
       return false;
     }
 
-    gsheets = GSheets(jsonDecode(credentials!));
+    gsheets = GSheets(jsonDecode(credentials ?? ""));
 
-    spreadsheet = await gsheets!.spreadsheet(spreadsheetId!);
+    spreadsheet = await gsheets!.spreadsheet(spreadsheetId ?? "");
 
-    sheet = spreadsheet!.worksheetByTitle(worksheetTitle!);
-    print(sheet);
+    sheet = spreadsheet!.worksheetByTitle(worksheetTitle ?? "");
 
     return !(sheet == null);
   }
@@ -169,13 +168,14 @@ class GsheetController extends ChangeNotifier {
       default:
         break;
     }
+    hasCredentials = true;
     notifyListeners();
     _hiveBox!.put(field, data);
   }
 
   Future<bool> upload(Workout workout) async {
     DateFormat format = DateFormat.yMd();
-    return true;
+
     return await sheet!.values
         .insertColumnByKey(format.format(workout.date!), workout.getSet());
   }

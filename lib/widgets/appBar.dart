@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:max_watts/hiveModel.dart';
 import 'package:max_watts/model.dart';
-import 'package:max_watts/pages/UploadPage.dart';
+import 'package:max_watts/router.dart';
 import 'package:max_watts/theme.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
@@ -34,9 +34,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 color: purple,
                 onPressed: () {
                   Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (BuildContext context) {
-                    return UploadPage(workout);
-                  }));
+                      .pushNamed(AppRouter.uploadRoute, arguments: workout);
+                  // Navigator.of(context)
+                  //     .push(MaterialPageRoute(builder: (BuildContext context) {
+                  //   return UploadPage(workout);
+                  // }));
                 },
               )
             ]
@@ -46,9 +48,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 color: purple,
                 onPressed: () {
                   Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (BuildContext context) {
-                    return UploadPage(workout);
-                  }));
+                      .pushNamed(AppRouter.uploadRoute, arguments: workout);
+                  // Navigator.of(context)
+                  //     .push(MaterialPageRoute(builder: (BuildContext context) {
+                  //   return UploadPage(workout);
+                  // }));
                 },
               )
             ],

@@ -44,7 +44,7 @@ class CredentialsDialog extends StatelessWidget {
           ),
           onPressed: () {
             Provider.of<GsheetController>(context, listen: false)
-                .updateCredentials(controller.text, field);
+                .updateCredentials(controller.text.trim(), field);
             Navigator.of(context).pop();
           },
         )

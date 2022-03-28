@@ -92,15 +92,86 @@ class _UploadPageState extends State<UploadPage> {
                                   style: Theme.of(context).textTheme.titleSmall,
                                 ),
                                 onPressed: () {
-                                  Provider.of<GsheetController>(context,
-                                          listen: false)
-                                      .upload(widget.workout);
+                                  showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return FutureBuilder(
+                                            future:
+                                                Provider.of<GsheetController>(
+                                                        context,
+                                                        listen: false)
+                                                    .upload(widget.workout),
+                                            builder: (BuildContext context,
+                                                AsyncSnapshot<bool> snapshot) {
+                                              if (snapshot.connectionState ==
+                                                  ConnectionState.done) {
+                                                if (snapshot.hasData &&
+                                                    snapshot.data!) {
+                                                  return Center(
+                                                    child: Container(
+                                                      child: Icon(
+                                                        Icons.done,
+                                                        size: 50,
+                                                        color: Colors.green,
+                                                      ),
+                                                    ),
+                                                  );
+                                                } else if (snapshot.hasData &&
+                                                    !snapshot.data!) {
+                                                  return const Center(
+                                                    child: Icon(
+                                                      Icons.error,
+                                                      size: 50,
+                                                      color: Colors.red,
+                                                    ),
+                                                  );
+                                                } else {
+                                                  return Center(
+                                                    child: Text(snapshot.error
+                                                        .toString()),
+                                                  );
+                                                }
+                                              } else {
+                                                return Center(
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    color: purple,
+                                                  ),
+                                                );
+                                              }
+                                            });
+                                      });
                                 },
                               ),
                             )
                           ],
                         );
                       } else if (snapshot.hasData && !snapshot.data!) {
+                        if (Provider.of<GsheetController>(context)
+                            .hasCredentials) {
+                          return Center(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                const Text(
+                                    "Error onnecting. Check Credentials"),
+                                TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(builder: (context) {
+                                        return const GsheetSettingsPage();
+                                      }));
+                                    },
+                                    child: Text(
+                                      "Check",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleSmall,
+                                    ))
+                              ],
+                            ),
+                          );
+                        }
                         return Center(
                           child: Column(
                             mainAxisSize: MainAxisSize.min,

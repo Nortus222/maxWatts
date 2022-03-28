@@ -5,6 +5,7 @@ import 'package:custom_timer/custom_timer.dart';
 import 'package:gsheets/gsheets.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:max_watts/hiveModel.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
@@ -172,12 +173,9 @@ class GsheetController extends ChangeNotifier {
   }
 
   Future<bool> upload(Workout workout) async {
-    // await sheet!.values.insertColumnByKey("2/17/22", workout.getSet());
-    await sheet!.values.insertColumn(2, workout.getSet(), fromRow: 2);
-    List<String> row = await sheet!.values.row(1, fromColumn: 2);
-
-    print(row);
-    print(await sheet!.values.columnByKey('2/22/22'));
+    DateFormat format = DateFormat.yMd();
     return true;
+    return await sheet!.values
+        .insertColumnByKey(format.format(workout.date!), workout.getSet());
   }
 }

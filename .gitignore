@@ -22,3 +22,4 @@ doc/api/
 
 ./lid/scripts/credentials.dart
 lib/scripts/credentials.dart
+lib/.DS_Store

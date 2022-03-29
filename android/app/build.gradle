@@ -68,7 +68,7 @@ android {
         else {
             print('not signed')
         }
-   }
+        }
 
    buildTypes {
        release {
@@ -90,6 +90,7 @@ android {
         
     }
    }
+    }
 }
 
 flutter {

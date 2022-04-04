@@ -120,6 +120,7 @@ class GsheetController extends ChangeNotifier {
   String? worksheetTitle;
   Box<String>? _hiveBox;
   bool hasCredentials = false;
+  bool hasConnected = false;
   GSheets? gsheets;
   Spreadsheet? spreadsheet;
   Worksheet? sheet;
@@ -145,13 +146,22 @@ class GsheetController extends ChangeNotifier {
       return false;
     }
 
+    if (hasConnected) {
+      return true;
+    }
+
     gsheets = GSheets(jsonDecode(credentials ?? ""));
 
     spreadsheet = await gsheets!.spreadsheet(spreadsheetId ?? "");
 
     sheet = spreadsheet!.worksheetByTitle(worksheetTitle ?? "");
 
-    return !(sheet == null);
+    if (sheet != null) {
+      hasConnected = true;
+      return true;
+    }
+
+    return false;
   }
 
   void updateCredentials(String data, String field) {
@@ -169,6 +179,7 @@ class GsheetController extends ChangeNotifier {
         break;
     }
     hasCredentials = true;
+    hasConnected = false;
     notifyListeners();
     _hiveBox!.put(field, data);
   }

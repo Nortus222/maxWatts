@@ -4,7 +4,7 @@ import 'package:max_watts/theme.dart';
 import 'package:provider/provider.dart';
 
 class Entry extends StatefulWidget {
-  Entry({Key? key}) : super(key: key);
+  const Entry({Key? key}) : super(key: key);
 
   @override
   State<Entry> createState() => _EntryState();
@@ -55,6 +55,7 @@ class _EntryState extends State<Entry> {
           child: TextButton(
               onPressed: () {
                 workouts.lastAppend(int.parse(controller.text.trim()));
+                timer.reset();
                 timer.start();
                 listController.scrollToIndex(
                   lastWorkout.length() - 1,

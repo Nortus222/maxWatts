@@ -44,7 +44,7 @@ class Workout extends HiveObject {
     }
 
     avg = sum / _set!.length.toDouble();
-    plank = avg * 0.9;
+    plank = max * 0.9;
   }
 
   void remove(int index) {
@@ -77,7 +77,7 @@ class Workout extends HiveObject {
     }
 
     avg = sum / _set!.length.toDouble();
-    plank = avg * 0.9;
+    plank = max * 0.9;
   }
 
   void reset() {

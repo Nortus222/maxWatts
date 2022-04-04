@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.max_watts">
+    package="com.max_watts">
    <application
-        android:label="max_watts"
+        android:label="Max Watts"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

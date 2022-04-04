@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:max_watts/model.dart';
-import 'package:max_watts/pages/infoPage.dart';
+import 'package:max_watts/router.dart';
 import 'package:max_watts/widgets/confirmDialog.dart';
 import 'package:provider/provider.dart';
 
@@ -33,11 +33,13 @@ class HistoryPage extends StatelessWidget {
                     subtitle: Text(
                         "MAX: ${model.workouts![i].max} MIN: ${model.workouts![i].min} AVG: ${model.workouts![i].avg.toStringAsFixed(1)}"),
                     onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) {
-                          return InfoPage(model.workouts![i]);
-                        },
-                      ));
+                      Navigator.of(context).pushNamed(AppRouter.infoRoute,
+                          arguments: model.workouts![i]);
+                      // Navigator.of(context).push(MaterialPageRoute(
+                      //   builder: (context) {
+                      //     return InfoPage(model.workouts![i]);
+                      //   },
+                      // ));
                     },
                   ),
                 ),

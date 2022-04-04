@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:max_watts/hiveModel.dart';
 import 'package:max_watts/model.dart';
-import 'package:max_watts/pages/GsheetSettingsPage.dart';
-import 'package:max_watts/scripts/credentials.dart';
+import 'package:max_watts/router.dart';
 import 'package:max_watts/theme.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
@@ -36,10 +35,7 @@ class _UploadPageState extends State<UploadPage> {
                   icon: const Icon(Icons.settings),
                   color: purple,
                   onPressed: () {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (context) {
-                      return const GsheetSettingsPage();
-                    }));
+                    Navigator.of(context).pushNamed(AppRouter.settingsRoute);
                   },
                 )
               ],
@@ -105,25 +101,35 @@ class _UploadPageState extends State<UploadPage> {
                                                 AsyncSnapshot<bool> snapshot) {
                                               if (snapshot.connectionState ==
                                                   ConnectionState.done) {
-                                                if (snapshot.hasData &&
-                                                    snapshot.data!) {
-                                                  return Center(
-                                                    child: Container(
-                                                      child: Icon(
-                                                        Icons.done,
-                                                        size: 50,
-                                                        color: Colors.green,
-                                                      ),
-                                                    ),
-                                                  );
-                                                } else if (snapshot.hasData &&
-                                                    !snapshot.data!) {
-                                                  return const Center(
-                                                    child: Icon(
-                                                      Icons.error,
-                                                      size: 50,
-                                                      color: Colors.red,
-                                                    ),
+                                                if (snapshot.hasData) {
+                                                  return AlertDialog(
+                                                    content: snapshot.data!
+                                                        ? const Icon(
+                                                            Icons.done,
+                                                            size: 50,
+                                                            color: Colors.green,
+                                                          )
+                                                        : const Icon(
+                                                            Icons.error,
+                                                            size: 50,
+                                                            color: Colors.red,
+                                                          ),
+                                                    actions: [
+                                                      TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.of(
+                                                                context,
+                                                              ).pop(),
+                                                          child: Text(
+                                                            snapshot.hasData
+                                                                ? "OK"
+                                                                : "Try Again",
+                                                            style: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .titleSmall,
+                                                          ))
+                                                    ],
                                                   );
                                                 } else {
                                                   return Center(
@@ -154,13 +160,11 @@ class _UploadPageState extends State<UploadPage> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 const Text(
-                                    "Error onnecting. Check Credentials"),
+                                    "Error Connecting. Check Credentials"),
                                 TextButton(
                                     onPressed: () {
-                                      Navigator.of(context).push(
-                                          MaterialPageRoute(builder: (context) {
-                                        return const GsheetSettingsPage();
-                                      }));
+                                      Navigator.of(context)
+                                          .pushNamed(AppRouter.settingsRoute);
                                     },
                                     child: Text(
                                       "Check",
@@ -180,10 +184,8 @@ class _UploadPageState extends State<UploadPage> {
                                   "You need to set up credentials first"),
                               TextButton(
                                   onPressed: () {
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(builder: (context) {
-                                      return const GsheetSettingsPage();
-                                    }));
+                                    Navigator.of(context)
+                                        .pushNamed(AppRouter.settingsRoute);
                                   },
                                   child: Text(
                                     "Set Up",

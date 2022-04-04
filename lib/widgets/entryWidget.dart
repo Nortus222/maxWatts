@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:max_watts/model.dart';
 import 'package:max_watts/theme.dart';
 import 'package:provider/provider.dart';
-import 'package:scroll_to_index/scroll_to_index.dart';
 
 class Entry extends StatefulWidget {
   Entry({Key? key}) : super(key: key);
@@ -38,10 +37,12 @@ class _EntryState extends State<Entry> {
                       fillColor: grey,
                       filled: true,
                       enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.transparent),
+                          borderSide:
+                              const BorderSide(color: Colors.transparent),
                           borderRadius: BorderRadius.circular(20)),
                       border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.transparent),
+                          borderSide:
+                              const BorderSide(color: Colors.transparent),
                           borderRadius: BorderRadius.circular(20)),
                       focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: purple),

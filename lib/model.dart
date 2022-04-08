@@ -32,6 +32,10 @@ class TimerController extends ChangeNotifier {
     notifyListeners();
   }
 
+  void pause() {
+    _controller!.pause();
+  }
+
   CustomTimerController getController() {
     return _controller!;
   }

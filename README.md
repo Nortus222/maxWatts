@@ -6,14 +6,14 @@ Max Watts is a Flutter mobile app designed to help you log and store rowing work
 
 - **Local Storage:** The app utilizes Hive, a No-SQL database, to store your workouts locally on your device.
 
-- **Google Sheets Integration:** Achieve easy data synchronization by linking the app with your Google Sheets. Follow the tutorial [here]([link_to_tutorial](https://medium.com/@a.marenkov/how-to-get-credentials-for-google-sheets-456b7e88c430)) to set up an Automated account on your spreadsheet.
+- **Google Sheets Integration:** Achieve easy data synchronization by linking the app with your Google Sheets. Follow the tutorial [here](https://medium.com/@a.marenkov/how-to-get-credentials-for-google-sheets-456b7e88c430) to set up an Automated account on your spreadsheet.
 
 ## Getting Started
 
 To make the most out of Max Watts, follow these steps:
 
 1. **Automated Account Setup:**
-    - Add an Automated account to your Google Sheets as explained in the [tutorial]([link_to_tutorial](https://medium.com/@a.marenkov/how-to-get-credentials-for-google-sheets-456b7e88c430)).
+    - Add an Automated account to your Google Sheets as explained in the [tutorial](https://medium.com/@a.marenkov/how-to-get-credentials-for-google-sheets-456b7e88c430).
     
 2. **API Key and Spreadsheet Details:**
     - Retrieve your API key from Google Cloud Console.

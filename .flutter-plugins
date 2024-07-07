@@ -1,7 +1,6 @@
 # This is a generated file; do not edit or check into version control.
-path_provider=/Users/ihor/flutterInstall/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.9/
-path_provider_android=/Users/ihor/flutterInstall/.pub-cache/hosted/pub.dartlang.org/path_provider_android-2.0.12/
-path_provider_ios=/Users/ihor/flutterInstall/.pub-cache/hosted/pub.dartlang.org/path_provider_ios-2.0.8/
-path_provider_linux=/Users/ihor/flutterInstall/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-2.1.5/
-path_provider_macos=/Users/ihor/flutterInstall/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-2.0.5/
-path_provider_windows=/Users/ihor/flutterInstall/.pub-cache/hosted/pub.dartlang.org/path_provider_windows-2.0.5/
+path_provider=/Users/ihor/.pub-cache/hosted/pub.dev/path_provider-2.1.2/
+path_provider_android=/Users/ihor/.pub-cache/hosted/pub.dev/path_provider_android-2.2.2/
+path_provider_foundation=/Users/ihor/.pub-cache/hosted/pub.dev/path_provider_foundation-2.3.2/
+path_provider_linux=/Users/ihor/.pub-cache/hosted/pub.dev/path_provider_linux-2.2.1/
+path_provider_windows=/Users/ihor/.pub-cache/hosted/pub.dev/path_provider_windows-2.2.1/

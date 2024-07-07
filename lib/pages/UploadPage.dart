@@ -5,7 +5,6 @@ import 'package:max_watts/model.dart';
 import 'package:max_watts/router.dart';
 import 'package:max_watts/theme.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 class UploadPage extends StatefulWidget {
   Workout workout;
@@ -64,17 +63,17 @@ class _UploadPageState extends State<UploadPage> {
                                         Colors.transparent),
                                   ),
                                   onPressed: () {
-                                    DatePicker.showDatePicker(
-                                      context,
-                                      showTitleActions: true,
-                                      onConfirm: (date) {
-                                        widget.workout.date = date;
-                                        Provider.of<WorkoutsController>(context,
-                                                listen: false)
-                                            .updateDate(widget.workout);
-                                        setState(() {});
-                                      },
-                                    );
+                                    // DatePicker.showDatePicker(
+                                    //   context,
+                                    //   showTitleActions: true,
+                                    //   onConfirm: (date) {
+                                    //     widget.workout.date = date;
+                                    //     Provider.of<WorkoutsController>(context,
+                                    //             listen: false)
+                                    //         .updateDate(widget.workout);
+                                    //     setState(() {});
+                                    //   },
+                                    // );
                                   },
                                 )
                               ],

@@ -25,10 +25,10 @@ class CredentialsDialog extends StatelessWidget {
             fillColor: grey,
             filled: true,
             enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.transparent),
+                borderSide: const BorderSide(color: Colors.transparent),
                 borderRadius: BorderRadius.circular(20)),
             border: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.transparent),
+                borderSide: const BorderSide(color: Colors.transparent),
                 borderRadius: BorderRadius.circular(20)),
             focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: purple),
@@ -42,7 +42,9 @@ class CredentialsDialog extends StatelessWidget {
           ),
           onPressed: () {
             Provider.of<GsheetController>(context, listen: false)
-                .updateCredentials(controller.text.trim(), field);
+                .updateCredentials(
+                    controller.text.replaceAll(RegExp(r'’'), '\'').trim(),
+                    field);
             Navigator.of(context).pop();
           },
         )

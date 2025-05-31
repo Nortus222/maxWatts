@@ -12,6 +12,7 @@ class Entry extends StatefulWidget {
 
 class _EntryState extends State<Entry> {
   TextEditingController controller = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -29,38 +30,59 @@ class _EntryState extends State<Entry> {
             Text("${lastWorkout.length() + 1}) "),
             Flexible(
                 flex: 2,
-                child: TextFormField(
-                    cursorColor: purple,
-                    controller: controller,
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      fillColor: grey,
-                      filled: true,
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.transparent),
-                          borderRadius: BorderRadius.circular(20)),
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.transparent),
-                          borderRadius: BorderRadius.circular(20)),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: purple),
-                          borderRadius: BorderRadius.circular(20)),
-                    ))),
+                child: Form(
+                  key: _formKey,
+                  child: TextFormField(
+                      cursorColor: purple,
+                      controller: controller,
+                      keyboardType: TextInputType.number,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Enter a value";
+                        }
+
+                        final number = int.tryParse(value);
+
+                        if (number == null) {
+                          return "Enter an integer";
+                        }
+
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        fillColor: grey,
+                        filled: true,
+                        enabledBorder: OutlineInputBorder(
+                            borderSide:
+                                const BorderSide(color: Colors.transparent),
+                            borderRadius: BorderRadius.circular(20)),
+                        border: OutlineInputBorder(
+                            borderSide:
+                                const BorderSide(color: Colors.transparent),
+                            borderRadius: BorderRadius.circular(20)),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: purple),
+                            borderRadius: BorderRadius.circular(20)),
+                      )),
+                )),
           ],
         ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: TextButton(
               onPressed: () {
-                workouts.lastAppend(int.parse(controller.text.trim()));
-                timer.start();
-                listController.scrollToIndex(
-                  lastWorkout.length() - 1,
-                  duration: const Duration(milliseconds: 500),
-                );
-                setState(() {
-                  controller.clear();
-                });
+                if (_formKey.currentState!.validate()) {
+                  workouts.lastAppend(int.parse(controller.text.trim()));
+                  timer.reset();
+                  timer.start();
+                  listController.scrollToIndex(
+                    lastWorkout.length() - 1,
+                    duration: const Duration(milliseconds: 500),
+                  );
+                  setState(() {
+                    controller.clear();
+                  });
+                }
               },
               child:
                   Text("Enter", style: Theme.of(context).textTheme.titleSmall)),

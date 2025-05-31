@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:max_watts/pages/HistoryPage.dart';
 import 'package:max_watts/pages/HomePage.dart';
+import 'package:max_watts/router.dart';
 import 'package:max_watts/theme.dart';
 
 class MainPage extends StatefulWidget {
@@ -32,9 +33,7 @@ class _MainPageState extends State<MainPage> {
       ),
       tabBuilder: (context, index) {
         return CupertinoTabView(
-          onGenerateRoute: (settings) {
-            return null;
-          },
+          onGenerateRoute: AppRouter.generateRoute,
           builder: (context) {
             return CupertinoPageScaffold(child: tabs![index]);
           },

@@ -36,6 +36,10 @@ class TimerController extends ChangeNotifier {
     notifyListeners();
   }
 
+  void pause() {
+    _controller!.pause();
+  }
+
   CustomTimerController getController() {
     return _controller!;
   }
@@ -124,7 +128,8 @@ class GsheetController extends ChangeNotifier {
   String? worksheetTitle;
   Box<String>? _hiveBox;
   bool hasCredentials = false;
-  var gsheets;
+  bool hasConnected = false;
+  GSheets? gsheets;
   Spreadsheet? spreadsheet;
   Worksheet? sheet;
 
@@ -149,13 +154,22 @@ class GsheetController extends ChangeNotifier {
       return false;
     }
 
-    gsheets = GSheets(jsonDecode(credentials!));
+    if (hasConnected) {
+      return true;
+    }
 
-    spreadsheet = await gsheets.spreadsheet(spreadsheetId);
+    gsheets = GSheets(jsonDecode(credentials ?? ""));
 
-    sheet = spreadsheet!.worksheetByTitle(worksheetTitle!);
+    spreadsheet = await gsheets!.spreadsheet(spreadsheetId ?? "");
 
-    return !(sheet == null);
+    sheet = spreadsheet!.worksheetByTitle(worksheetTitle ?? "");
+
+    if (sheet != null) {
+      hasConnected = true;
+      return true;
+    }
+
+    return false;
   }
 
   void updateCredentials(String data, String field) {
@@ -172,13 +186,15 @@ class GsheetController extends ChangeNotifier {
       default:
         break;
     }
+    hasCredentials = true;
+    hasConnected = false;
     notifyListeners();
     _hiveBox!.put(field, data);
   }
 
   Future<bool> upload(Workout workout) async {
     DateFormat format = DateFormat.yMd();
-    return true;
+
     return await sheet!.values
         .insertColumnByKey(format.format(workout.date!), workout.getSet());
   }

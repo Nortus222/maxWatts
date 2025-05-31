@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:max_watts/hiveModel.dart';
 import 'package:max_watts/model.dart';
 import 'package:max_watts/pages/mainPage.dart';
+import 'package:max_watts/router.dart';
 import 'package:max_watts/theme.dart';
 import 'package:provider/provider.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -33,6 +34,8 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
         ChangeNotifierProvider.value(value: GsheetController()),
       ],
       child: MaterialApp(
+        onGenerateRoute: AppRouter.generateRoute,
+        initialRoute: "/",
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: theme,

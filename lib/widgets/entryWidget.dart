@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:max_watts/model.dart';
 import 'package:max_watts/theme.dart';
 import 'package:provider/provider.dart';
-import 'package:scroll_to_index/scroll_to_index.dart';
 
 class Entry extends StatefulWidget {
-  Entry({Key? key}) : super(key: key);
+  const Entry({Key? key}) : super(key: key);
 
   @override
   State<Entry> createState() => _EntryState();

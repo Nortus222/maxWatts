@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:max_watts/model.dart';
 import 'package:max_watts/theme.dart';

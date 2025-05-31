@@ -26,6 +26,27 @@ class HistoryPage extends StatelessWidget {
               return Dismissible(
                 key: UniqueKey(),
                 direction: DismissDirection.endToStart,
+                onDismissed: (direction) {
+                  model.remove(i);
+                },
+                confirmDismiss: (direction) {
+                  return showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return const ConfirmDialog();
+                      });
+                },
+                background: Container(
+                  alignment: Alignment.centerRight,
+                  padding: const EdgeInsets.only(right: 10),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.red),
+                  child: const Icon(
+                    Icons.delete,
+                    size: 25,
+                  ),
+                ),
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 5.0),
                   child: ListTile(
@@ -40,27 +61,6 @@ class HistoryPage extends StatelessWidget {
                       ));
                     },
                   ),
-                ),
-                onDismissed: (direction) {
-                  model.remove(i);
-                },
-                confirmDismiss: (direction) {
-                  return showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return const ConfirmDialog();
-                      });
-                },
-                background: Container(
-                  child: const Icon(
-                    Icons.delete,
-                    size: 25,
-                  ),
-                  alignment: Alignment.centerRight,
-                  padding: const EdgeInsets.only(right: 10),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.red),
                 ),
               );
             }),

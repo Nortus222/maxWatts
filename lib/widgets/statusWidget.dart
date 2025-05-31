@@ -23,16 +23,16 @@ class StatusWidget extends StatelessWidget {
                             return CredentialsDialog(data, field);
                           });
                     },
-                    child: Text(data!.trim()),
                     style: ButtonStyle(
-                        textStyle: MaterialStateProperty.all(
+                        textStyle: WidgetStateProperty.all(
                             const TextStyle(fontSize: 18)),
                         maximumSize:
-                            MaterialStateProperty.all(const Size(150, 80)),
+                            WidgetStateProperty.all(const Size(150, 80)),
                         minimumSize:
-                            MaterialStateProperty.all(const Size(100, 50)),
+                            WidgetStateProperty.all(const Size(100, 50)),
                         backgroundColor:
-                            MaterialStateProperty.all(Colors.transparent)),
+                            WidgetStateProperty.all(Colors.transparent)),
+                    child: Text(data!.trim()),
                   )
                 : const Icon(
                     Icons.error,
@@ -58,16 +58,16 @@ class StatusWidget extends StatelessWidget {
                             return CredentialsDialog(data, field);
                           });
                     },
-                    child: const Text("edit"),
                     style: ButtonStyle(
-                        textStyle: MaterialStateProperty.all(
+                        textStyle: WidgetStateProperty.all(
                             const TextStyle(fontSize: 18)),
                         maximumSize:
-                            MaterialStateProperty.all(const Size(100, 80)),
+                            WidgetStateProperty.all(const Size(100, 80)),
                         minimumSize:
-                            MaterialStateProperty.all(const Size(50, 50)),
+                            WidgetStateProperty.all(const Size(50, 50)),
                         backgroundColor:
-                            MaterialStateProperty.all(Colors.transparent)),
+                            WidgetStateProperty.all(Colors.transparent)),
+                    child: const Text("edit"),
                   )
             : data != null
                 ? TextButton(
@@ -78,16 +78,16 @@ class StatusWidget extends StatelessWidget {
                             return CredentialsDialog(data, field);
                           });
                     },
-                    child: const Text("edit"),
                     style: ButtonStyle(
-                        textStyle: MaterialStateProperty.all(
+                        textStyle: WidgetStateProperty.all(
                             const TextStyle(fontSize: 18)),
                         maximumSize:
-                            MaterialStateProperty.all(const Size(100, 80)),
+                            WidgetStateProperty.all(const Size(100, 80)),
                         minimumSize:
-                            MaterialStateProperty.all(const Size(50, 50)),
+                            WidgetStateProperty.all(const Size(50, 50)),
                         backgroundColor:
-                            MaterialStateProperty.all(Colors.transparent)),
+                            WidgetStateProperty.all(Colors.transparent)),
+                    child: const Text("edit"),
                   )
                 : TextButton(
                     onPressed: () {
@@ -97,16 +97,16 @@ class StatusWidget extends StatelessWidget {
                             return CredentialsDialog(data, field);
                           });
                     },
-                    child: const Text("Enter"),
                     style: ButtonStyle(
-                        textStyle: MaterialStateProperty.all(
+                        textStyle: WidgetStateProperty.all(
                             const TextStyle(fontSize: 18)),
                         maximumSize:
-                            MaterialStateProperty.all(const Size(100, 80)),
+                            WidgetStateProperty.all(const Size(100, 80)),
                         minimumSize:
-                            MaterialStateProperty.all(const Size(50, 50)),
+                            WidgetStateProperty.all(const Size(50, 50)),
                         backgroundColor:
-                            MaterialStateProperty.all(Colors.transparent)),
+                            WidgetStateProperty.all(Colors.transparent)),
+                    child: const Text("Enter"),
                   )
       ],
     );

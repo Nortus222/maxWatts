@@ -14,23 +14,38 @@ class Timer extends StatelessWidget {
     //TODO add controlls
     return CustomTimer(
       controller: controller,
-      begin: Duration(minutes: 1),
-      end: Duration(),
-      builder: (time) {
-        return Text(
-          "${time.minutes}:${time.seconds}",
-          style: TextStyle(fontSize: 24),
-        );
-      },
-      stateBuilder: (time, state) {
-        if (state == CustomTimerState.finished) {
-          return Text("GO");
+      builder: (state, time) {
+        Text child;
+
+        switch (state) {
+          case CustomTimerState.reset:
+            child = Text(
+              "00:00",
+              style: TextStyle(fontSize: 24),
+            );
+            break;
+          case CustomTimerState.paused:
+            child = Text(
+              "${time.minutes}:${time.seconds.toString().padLeft(2, '0')}",
+              style: TextStyle(fontSize: 24),
+            );
+            break;
+          case CustomTimerState.counting:
+            child = Text(
+              "${time.minutes}:${time.seconds.toString().padLeft(2, '0')}",
+              style: TextStyle(fontSize: 24),
+            );
+            break;
+          case CustomTimerState.finished:
+            child = Text(
+              "GO",
+              style: TextStyle(fontSize: 24),
+            );
+            break;
         }
-        return null;
-      },
-      animationBuilder: (child) {
+
         return AnimatedSwitcher(
-          duration: Duration(milliseconds: 250),
+          duration: Duration(milliseconds: 300),
           child: child,
         );
       },

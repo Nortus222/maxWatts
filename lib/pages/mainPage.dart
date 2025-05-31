@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:max_watts/pages/UploadPage.dart';
 import 'package:max_watts/pages/HistoryPage.dart';
 import 'package:max_watts/pages/HomePage.dart';
 import 'package:max_watts/theme.dart';
@@ -33,7 +32,9 @@ class _MainPageState extends State<MainPage> {
       ),
       tabBuilder: (context, index) {
         return CupertinoTabView(
-          onGenerateRoute: (settings) {},
+          onGenerateRoute: (settings) {
+            return null;
+          },
           builder: (context) {
             return CupertinoPageScaffold(child: tabs![index]);
           },

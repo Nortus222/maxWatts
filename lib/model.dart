@@ -18,8 +18,12 @@ const WORKSHEETTITLE = 'worksheettitle';
 class TimerController extends ChangeNotifier {
   CustomTimerController? _controller;
 
-  TimerController() {
-    _controller = CustomTimerController();
+  TimerController(TickerProvider vsync) {
+    _controller = CustomTimerController(
+      begin: Duration(minutes: 1),
+      end: Duration(),
+      vsync: vsync,
+    );
   }
 
   void start() {

@@ -3,10 +3,9 @@ import 'package:intl/intl.dart';
 import 'package:max_watts/hiveModel.dart';
 import 'package:max_watts/model.dart';
 import 'package:max_watts/pages/GsheetSettingsPage.dart';
-import 'package:max_watts/scripts/credentials.dart';
 import 'package:max_watts/theme.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 
 class UploadPage extends StatefulWidget {
   Workout workout;
@@ -61,10 +60,8 @@ class _UploadPageState extends State<UploadPage> {
                               children: [
                                 const Text("Date: "),
                                 TextButton(
-                                  child:
-                                      Text(format.format(widget.workout.date!)),
                                   style: ButtonStyle(
-                                    backgroundColor: MaterialStateProperty.all(
+                                    backgroundColor: WidgetStateProperty.all(
                                         Colors.transparent),
                                   ),
                                   onPressed: () {
@@ -80,6 +77,8 @@ class _UploadPageState extends State<UploadPage> {
                                       },
                                     );
                                   },
+                                  child:
+                                      Text(format.format(widget.workout.date!)),
                                 )
                               ],
                             ),

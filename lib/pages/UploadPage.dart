@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:max_watts/hiveModel.dart';
 import 'package:max_watts/model.dart';
-import 'package:max_watts/pages/GsheetSettingsPage.dart';
 import 'package:max_watts/theme.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:max_watts/router.dart';
 
 class UploadPage extends StatefulWidget {

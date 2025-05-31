@@ -9,22 +9,25 @@ final theme = ThemeData(
       tileColor: grey,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
     ),
-    cardTheme: CardTheme(
-        color: grey,
-        elevation: 0.5,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
+    cardTheme: CardThemeData(
+      color: grey,
+      elevation: 0.5,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+    ),
     textTheme: TextTheme(
         bodyMedium: const TextStyle(color: Colors.black, fontSize: 24),
         titleSmall: TextStyle(color: grey, fontSize: 22)),
     textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(
             textStyle:
-                MaterialStateProperty.all(TextStyle(color: grey, fontSize: 22)),
-            backgroundColor: MaterialStateProperty.all(purple),
-            overlayColor: MaterialStateProperty.all(focusPurple),
-            maximumSize: MaterialStateProperty.all(const Size(200, 80)),
-            minimumSize: MaterialStateProperty.all(const Size(150, 50)),
-            shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                WidgetStateProperty.all(TextStyle(color: grey, fontSize: 22)),
+            backgroundColor: WidgetStateProperty.all(purple),
+            overlayColor: WidgetStateProperty.all(focusPurple),
+            maximumSize: WidgetStateProperty.all(const Size(200, 80)),
+            minimumSize: WidgetStateProperty.all(const Size(150, 50)),
+            shape: WidgetStateProperty.all(RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20))))),
     appBarTheme: AppBarTheme(
         iconTheme: IconThemeData(color: purple),

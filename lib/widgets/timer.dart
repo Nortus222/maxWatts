@@ -22,28 +22,43 @@ class _TimerState extends State<Timer> {
           child: Padding(
             padding: const EdgeInsets.only(left: 70.0),
             child: CustomTimer(
-              controller: controller,
-              begin: const Duration(minutes: 1),
-              end: const Duration(),
-              builder: (time) {
-                return Text(
-                  "${time.minutes}:${time.seconds}",
-                  style: const TextStyle(fontSize: 24),
-                );
-              },
-              stateBuilder: (time, state) {
-                if (state == CustomTimerState.finished) {
-                  return const Text("GO");
-                }
-                return null;
-              },
-              animationBuilder: (child) {
-                return AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 250),
-                  child: child,
-                );
-              },
-            ),
+      controller: controller,
+      builder: (state, time) {
+        Text child;
+
+        switch (state) {
+          case CustomTimerState.reset:
+            child = Text(
+              "00:00",
+              style: TextStyle(fontSize: 24),
+            );
+            break;
+          case CustomTimerState.paused:
+            child = Text(
+              "${time.minutes}:${time.seconds.toString().padLeft(2, '0')}",
+              style: TextStyle(fontSize: 24),
+            );
+            break;
+          case CustomTimerState.counting:
+            child = Text(
+              "${time.minutes}:${time.seconds.toString().padLeft(2, '0')}",
+              style: TextStyle(fontSize: 24),
+            );
+            break;
+          case CustomTimerState.finished:
+            child = Text(
+              "GO",
+              style: TextStyle(fontSize: 24),
+            );
+            break;
+        }
+
+        return AnimatedSwitcher(
+          duration: Duration(milliseconds: 300),
+          child: child,
+        );
+      }
+              ),
           ),
         ),
         IconButton(

@@ -15,15 +15,20 @@ void main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider.value(value: TimerController()),
+        ChangeNotifierProvider.value(value: TimerController(this)),
         ChangeNotifierProvider.value(value: ListScrollController()),
         ChangeNotifierProvider.value(value: WorkoutsController()),
         ChangeNotifierProvider.value(value: GsheetController()),

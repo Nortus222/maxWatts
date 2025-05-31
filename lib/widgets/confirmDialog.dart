@@ -22,7 +22,7 @@ class ConfirmDialog extends StatelessWidget {
         ),
         TextButton(
             style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all(Colors.red)),
+                foregroundColor: WidgetStateProperty.all(Colors.red)),
             onPressed: () {
               Navigator.of(context).pop(true);
             },

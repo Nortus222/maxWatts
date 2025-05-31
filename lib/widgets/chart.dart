@@ -4,8 +4,8 @@ import 'package:max_watts/hiveModel.dart';
 import 'package:max_watts/theme.dart';
 
 class Chart extends StatelessWidget {
-  Workout workout;
-  Chart(this.workout, {Key? key}) : super(key: key);
+  final Workout workout;
+  const Chart(this.workout, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,24 +16,43 @@ class Chart extends StatelessWidget {
       child: LineChart(LineChartData(
         gridData: FlGridData(show: false),
         titlesData: FlTitlesData(
-            show: false,
-            rightTitles: SideTitles(showTitles: false),
-            topTitles: SideTitles(showTitles: false),
-            bottomTitles: SideTitles(
-                reservedSize: 22,
-                getTextStyles: (context, value) =>
-                    const TextStyle(color: Colors.black, fontSize: 14),
-                showTitles: true,
-                interval: 1,
-                getTitles: (value) => value.toInt().toString(),
-                margin: 12),
-            leftTitles: SideTitles(
-                getTextStyles: (context, value) =>
-                    const TextStyle(color: Colors.black, fontSize: 14),
-                showTitles: true,
-                interval: 1,
-                getTitles: (value) => value.toInt().toString(),
-                margin: 12)),
+          show: false,
+          rightTitles: AxisTitles(
+            sideTitles: SideTitles(showTitles: false),
+          ),
+          topTitles: AxisTitles(
+            sideTitles: SideTitles(showTitles: false),
+          ),
+          bottomTitles: AxisTitles(
+            sideTitles: SideTitles(
+              reservedSize: 22,
+              getTitlesWidget: (value, meta) {
+                return Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Text(
+                    workout.getSet()[value.toInt()].toString(),
+                    style: const TextStyle(color: Colors.black, fontSize: 14),
+                  ),
+                );
+              },
+              showTitles: true,
+              interval: 1,
+            ),
+          ),
+          leftTitles: AxisTitles(
+            sideTitles: SideTitles(
+              getTitlesWidget: (value, meta) => Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  value.toInt().toString(),
+                  style: const TextStyle(color: Colors.black, fontSize: 14),
+                ),
+              ),
+              showTitles: true,
+              interval: 1,
+            ),
+          ),
+        ),
         borderData: FlBorderData(show: false),
         minX: 0,
         minY: workout.min - 100,
